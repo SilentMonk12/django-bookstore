@@ -91,20 +91,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'bookstore.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-#
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'bookstore',
-#         'USER': 'varun',
-#         'PASSWORD': 'OneTwoThree4',
-#         'SERVER': 'konoserver.database.windows.net',
-#         'PORT': '1433'
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
