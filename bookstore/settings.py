@@ -22,10 +22,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#_&=00i)tksdb#v5+5_bo=e8--m@1awp(k=q%1lv+fepvve%z)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'https://recbookstore.azurewebsites.net',
+    'recbookstore.azurewebsites.net',
     'localhost',
     '127.0.0.1'
 ]
