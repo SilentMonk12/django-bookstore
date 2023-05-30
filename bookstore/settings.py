@@ -30,8 +30,9 @@ load_dotenv(BASE_DIR / '.env')
 # SECRET_KEY = '#_&=00i)tksdb#v5+5_bo=e8--m@1awp(k=q%1lv+fepvve%z)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = True //For localhost development
+# DEBUG = False
+DEBUG = True 
+# For localhost development
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
