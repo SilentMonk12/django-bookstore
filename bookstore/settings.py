@@ -33,7 +33,7 @@ load_dotenv(BASE_DIR / '.env')
 DEBUG = False
 # DEBUG = True //For localhost development
 
-SECRET_KEY = os.getenv('SECURE_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = [
     'https://recbookstore.azurewebsites.net',
