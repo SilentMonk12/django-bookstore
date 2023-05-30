@@ -6,3 +6,4 @@ mssql-django==1.2
 django-storages==1.13.2
 azure-core==1.26.4
 azure-storage-blob==12.16.0
+whitenoise==6.4.0
