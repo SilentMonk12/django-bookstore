@@ -33,7 +33,7 @@ load_dotenv(BASE_DIR / '.env')
 DEBUG = False
 # DEBUG = True //For localhost development
 
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv('SECURE_KEY')
 
 ALLOWED_HOSTS = [
     'https://recbookstore.azurewebsites.net',
@@ -110,7 +110,7 @@ DATABASES = {
         'USER': os.environ.get('DBUSER'),
         'PASSWORD': os.environ.get('DBPASS'),
         'Trusted_Connection': 'no',
-        'HOST': os.environ.get('DBHOST'),
+        'HOST': os.environ.get('HOST'),
         'PORT': os.environ.get('PORT'),
         'OPTIONS': {
             'driver': 'ODBC Driver 18 for SQL Server',
