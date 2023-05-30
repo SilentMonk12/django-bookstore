@@ -37,6 +37,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 ALLOWED_HOSTS = [
     'https://recbookstore.azurewebsites.net',
+    'recbookstore.azurewebsites.net',
     'localhost',
     '127.0.0.1'
 ]
