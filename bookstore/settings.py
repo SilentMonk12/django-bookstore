@@ -65,6 +65,8 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -141,18 +143,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 DEFAULT_FILE_STORAGE = 'bookstore.azure_storage.AzureMediaStorage'
-STATICFILES_STORAGE = 'bookstore.azure_storage.AzureStaticStorage'
+# STATICFILES_STORAGE = 'bookstore.azure_storage.AzureStaticStorage'
 
 AZURE_ACCOUNT_NAME = os.getenv('AZURE_ACCOUNT_NAME')
 AZURE_ACCOUNT_KEY = os.getenv('AZURE_ACCOUNT_KEY')
 AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.bookstore.windows.net'
 
-STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/media/'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
-# STATIC_URL = '/static/'
 #
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
