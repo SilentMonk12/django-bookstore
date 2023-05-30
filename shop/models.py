@@ -26,9 +26,9 @@ class Category(models.Model):
 class Product(models.Model):
     paginate_by = 10
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, db_index=True)
+    name = models.CharField(max_length=500, db_index=True)
     slug = models.SlugField(max_length=100, db_index=True)
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=True, max_length=1000)
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True)
     available = models.BooleanField(default=False)
     stock = models.PositiveIntegerField(blank=True)

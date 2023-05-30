@@ -11,41 +11,24 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from pathlib import Path
-
-from dotenv import load_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-load_dotenv(BASE_DIR / '.env')
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '#_&=00i)tksdb#v5+5_bo=e8--m@1awp(k=q%1lv+fepvve%z)'
-
-
-# # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-#
-# ALLOWED_HOSTS = []
-
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = '#_&=00i)tksdb#v5+5_bo=e8--m@1awp(k=q%1lv+fepvve%z)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', '0').lower() in ['true', 't', '1']
+DEBUG = True
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
-CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
-
-SECURE_SSL_REDIRECT = \
-    os.getenv('SECURE_SSL_REDIRECT', '0').lower() in ['true', 't', '1']
-if SECURE_SSL_REDIRECT:
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+ALLOWED_HOSTS = [
+    'https://recbookstore.azurewebsites.net',
+    'localhost',
+    '127.0.0.1'
+]
 
 # Application definition
 
@@ -97,18 +80,33 @@ WSGI_APPLICATION = 'bookstore.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'bookstore',
+#         'USER': 'varun',
+#         'PASSWORD': 'OneTwoThree4',
+#         'SERVER': 'konoserver.database.windows.net',
+#         'PORT': '1433'
+#     }
+# }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DBNAME'),
-        'HOST': os.environ.get('DBHOST'),
-        'USER': os.environ.get('DBUSER'),
-        'PASSWORD': os.environ.get('DBPASS'),
-        'OPTIONS': {'sslmode': 'require'},
-    }
+        'ENGINE': 'mssql',
+        'NAME': 'bookstore',
+        'USER': 'varun',
+        'PASSWORD': 'OneTwoThree4',
+        'Trusted_Connection': 'no',
+        'HOST': 'tcp:konoserver.database.windows.net',
+        'PORT': '1433',
+        'OPTIONS': {
+            'driver': 'ODBC Driver 18 for SQL Server',
+            'extra_params': "Encrypt=yes;TrustServerCertificate=no",
+        },
+    },
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -132,7 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Kathmandu'
+TIME_ZONE = 'Asia/Calcutta'
 
 USE_I18N = True
 
