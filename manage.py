@@ -3,19 +3,9 @@
 import os
 import sys
 
-from dotenv import load_dotenv
-
 
 def main():
-    is_prod = 'WEBSITE_HOSTNAME' in os.environ
-    if not is_prod:
-        print("Loading environment variables from .env file")
-        load_dotenv('./.env')
-
-    settings_module = "bookstore.production" if is_prod else 'bookstore.settings'
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', settings_module)
-
-    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bookstore.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'bookstore.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
