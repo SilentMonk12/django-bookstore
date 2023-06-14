@@ -11,7 +11,6 @@
     
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' >
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
@@ -19,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/owl.carousel.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
-    
+
     <style type="text/css">
         .thumbnail p, .thumbnail h4 {
             white-space: nowrap;
@@ -290,20 +289,62 @@
           font-weight: bold;
           color: #1d7afd;
         }
+        .infinite-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin: 0 -10px;
+        }
+
+        .infinite-item {
+            flex: 0 0 20%;
+            max-width: 20%;
+            padding: 0 10px;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #183b56;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:5%">
             <ul class="navbar-nav md-auto">
-                <h3 style="color: skyblue"><marquee behavior="scroll" direction="left" width="800">Informing. Educating. Inspiring. For the discerning reader.</marquee></h3>
+                <h3 style="color: #183b56"><marquee behavior="scroll" direction="left" width="800">Welcome to the BookStore.</marquee></h3>
             </ul>
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-user"></i> {{user.username}}</a>
                     </li>
-                    
+
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                     </li>
@@ -325,33 +366,29 @@
         </div>
     </nav>
    <!--  <div class="container-fluid"> -->
-    <div class="row" style="margin-top:-3% ">
-        <div class="col-1">
-            <a class="navbar-brand" href="{% url 'shop:product_list' %}"><img src="{% static 'img/booklogo.png' %}" height="120" width="110"></a>
+    <div class="row" style="margin-top:-3%;">
+        <div class="col-1"  style="margin-top:1.9%; margin-left:5%; z-index:-5">
+            <a class="navbar-brand" href="{% url 'shop:product_list' %}"><img src="{% static 'img/img.png' %}" height="130" width="140" ></a>
         </div>
-        <div class="col-11" style="margin-top:2.6%">
-            <nav class="navbar navbar-expand-lg navbar-light bg-info rounded">
+        <div class="col-10" style="margin-top:5%;margin-left: 2%">
+            <nav class="navbar navbar-expand-lg navbar-light rounded" style="background-color: #183b56">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="{% url 'shop:product_list' %}"><i class="fas fa-home" style="color: white"></i></a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'about:about_detail' %}" style="color: white" >About Us</a></li>
-                <li  class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="avbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white" >Books</a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <ol class="list-unstyled">
-                      <li {% if not category %} class="active"{% endif %}><a class="dropdown-item" style="color:red" href="{% url 'shop:product_list' %}">All Products</a></li>
-                        {% for c in categories %}
-                          <li {% if category.slug == slug %} class="active"{% endif %}><a  class="dropdown-item" href="{{ c.get_absolute_url }}" style="color: red">{{ c.name }}</a></li>
-                        {% endfor %}
-                    </ol>
-                  </div>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'contact:contact_detail' %}" style="color: white" >Contact</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://avhiaryal54.wordpress.com/" target="_blank" style="color: white" >Blog</a></li>
-                
-                {% if user.is_authenticated %}
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop:product_list' %}"><i class="fas fa-home" style="color: white"></i></a></li>
+                    <li  class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="avbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white" >Books</a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <ol class="list-unstyled">
+                          <li {% if not category %} class="active"{% endif %}><a class="dropdown-item" style="color:red" href="{% url 'shop:product_list' %}">All Products</a></li>
+                            {% for c in categories %}
+                              <li {% if category.slug == slug %} class="active"{% endif %}><a  class="dropdown-item" href="{{ c.get_absolute_url }}" style="color: red">{{ c.name }}</a></li>
+                            {% endfor %}
+                        </ol>
+                      </div>
+                    </li>
+                    {% if user.is_authenticated %}
                     <li  class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="avbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white" >My Account</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <ol class="list-unstyled">
@@ -370,24 +407,27 @@
                             </ol>
                         </div>
                     </li>
-                {% endif %}
-              </ul>
-            </div>
+                    {% endif %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact:contact_detail' %}" style="color: white" >Contact</a></li>
+
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about:about_detail' %}" style="color: white" >About Us</a></li>
+
+                </ul>
+                </div>
                 <ul class="navbar-nav ml-auto">
-<!--                  <form class="form-inline">-->
                     <div class="form-inline">
-                        <div id="style" style="margin:10px">
-                            <select class="form-select" id="select_language" onchange="updateCountry()"></select>
+                        <div id="style" style="margin:2px">
+                            <select class="form-select" id="select_language" onchange="updateCountry()" ></select>
                             <select class="form-select mt-2" id="select_dialect"></select>
                         </div>
                         <form id = "searchForm">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id = "input-search" name='search' value="{{search_term}}" size="50px">
-                            <button class="btn btn-outline-dark my-2 my-sm-0" value="Send" id="send" type="submit" >Search</button>
+                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id = "input-search" name='search' value="{{search_term}}" size="25px">
+                            <button class="btn btn-outline-dark my-2 my-sm-0" style="color: white" value="Send" id="send" type="submit" >Search</button>
                         </form>
-                        <button class="btn btn-success my-2 my-sm-0" id="start" style="margin-left:10px">Start</button>
-                            <button class="btn btn-danger my-2 my-sm-0" id="stop" style="display: none">Stop</button>
-                        </div>
+                        <button class="btn my-2 my-sm-0" id="start" style="margin-left:10px; color: white">Start</button>
+                        <button class="btn btn-danger my-2 my-sm-0" id="stop" style="display: none">Stop</button>
                         <!-- </form>-->
+                    </div>
                 </ul>
             </nav>
         </div>
@@ -395,14 +435,14 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-white"></nav>
     </div>
-    <p id="status" class="lead mt-3" style="display: none; margin-left:30px;">Listening...</p>
-    <div class="p-3" id = "textField" style="border: 1px solid gray; height: 50px; border-radius: 8px; margin: 25px;" >
+    <p id="status" class="lead mt-3" style="display: none; margin-left:30px; z-index:-5">Listening...</p>
+    <div class="p-3" id = "textField" style="border: 1px solid gray; width : 250px; height: 50px; border-radius: 8px; margin-top: 0px; margin-left: 45%" >
       <span id="final"></span>
       <span id="interim"></span>
     </div>
         {% if messages %}
             {% for message in messages %}
-                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <div class="alert alert-info alert-dismissible fade show" style="width:80%; margin-left:10%; margin-top: 2%" role="alert">
                     {{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
@@ -411,16 +451,13 @@
     </div>
     {% block content %}
     {% endblock %}
-<!--    <div class="floating-button-div">-->
-<!--      <button class="fb">Floating Button</button>-->
-<!--    </div>-->
     <hr>
     <footer class="footer_section">
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-lg-3 footer_col ">
-              <h4>LearnSpace</h4>
-              <p>LearnSpace is a Virtual Classroom application for students.</p>
+              <h4>BookStore</h4>
+              <p>It is a virtual book library made for everyone..</p>
               <a class="btn" href="#top"><i class="fa fa-arrow-up fa-lg"></i></a>
             </div>
             <div class="col-md-6 col-lg-2 mx-auto footer_col"></div>
@@ -429,21 +466,21 @@
                 <h4>Reach at..</h4>
                 <div class="contact_link_box">
                   <a href="#map"><i class="fa fa-map-marker" aria-hidden="true"></i><span>Location</span></a>
-                  <a href="mailto:learnspace12@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i><span>learnspace12@gmail.com</span></a>
-                <a href="https://www.facebook.com/learnspace12" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i> facebook.com/learnspace12</a>
-                <a href="https://www.instagram.com/learnspace12"><i class="fa fa-instagram" aria-hidden="true"></i> instagram.com/learnspace12</a>
+                  <a href="mailto:recBookStore12@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i><span>recBookStore12@gmail.com</span></a>
+                <a href="https://www.facebook.com/recBookStore12" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i> facebook.com/recBookStore12</a>
+                <a href="https://www.instagram.com/recBookStore12"><i class="fa fa-instagram" aria-hidden="true"></i> instagram.com/recBookStore12</a>
                 </div>
               </div>
             </div>
             <div class="col-md-6 col-lg-3 footer_col">
               <div class="footer_detail">
                 <h4>About</h4>
-                <p>LearnSpace is a free virtual learning tool for learning online. It is developed to help the student for their studies to improve.</p>
+                <p>It is a virtual book library made for everyone. It is developed to help everyone for their enjoyment.</p>
               </div>
             </div>
           </div>
           <div class="footer-info">
-            <p>This website is made by <b>students for the students</b>.</p>
+            <p>This website is made by <b>students for the people</b>.</p>
           </div>
         </div>
     </footer>

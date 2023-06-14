@@ -1,7 +1,7 @@
 {% extends 'shop/base.html' %}
 {% load static %}
 {% block title %}
-    {% if category %}{{ category.name }} {% else %} BookBuzz - Online Bookstore| Home{% endif %}
+    {% if category %}{{ category.name }} {% else %} BookStore - Online Bookstore| Home{% endif %}
 {% endblock %}
 
 
@@ -24,8 +24,8 @@
         {% endfor %} 
       </ul>                  
     </div>
-    <div class="col-8" style="margin-top:80px">
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="min-height: 0;min-width: 0">
+    <div class="col-10" style="margin-top:30px">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="min-height: 0;min-width: 0 ; border: 1px solid gray; border-radius: 18px; margin-left: 2%; padding:2%">
         <div class="carousel-inner">
           <div class="carousel-item active"><img class="d-block w-100" src="{% static 'img/slide1.jpg' %}" alt="First slide"></div>
           <div class="carousel-item"><img class="d-block w-100" src="{% static 'img/slide2.jpg' %}" alt="Second slide"></div>
@@ -50,27 +50,30 @@
 </div>
 
 <h4 class="shadow p-3 mb-1 bg-white rounded" align="center" style="color: grey ">ALL BOOKS</h4>
-<div style="margin-top: 2%;margin-left: 6%">
+<div style="margin-top: 2%">
   <div class="row infinite-container">
-    {% for product in products %}
-    <div class="card text-black border-light mb-5 infinite-item"  style="max-width: 18rem;margin-right: 2%">
+  {% for product in products %}
+    <div class="card text-black border-light mb-5 infinite-item">
       <div class="card-body">
         <a href="{{ product.get_absolute_url }}">
-         <img src="{% if product.image %}{{ product.image }} {% else %}{% static 'img/no_image.png' %} {% endif %}" alt="{{product.name}}" style="height: 200px; width: 150px">
+          <img src="{% if product.image %}{{ product.image }}{% else %}{% static 'img/no_image.png' %}{% endif %}" alt="{{ product.name }}">
         </a>
-          <hr>
-          <h5 class="text-left">{{ product.name|truncatewords:20 }}</h5>
-          <p class="card-text">Rs. {{ product.price }}</p>
-          {% if product.stock > 0 %}
-            <p class="card-text" style="color: teal">In Stock</p>
-          {% else %}
-            <p class="card-text" style="color: gold">Out of Stock</p>
-          {% endif %}
-          <p><a href="{{ product.get_absolute_url }}" class="btn btn-dark btn-sm">View</a></p>
+        <hr>
+        <h5 class="text-left">{{ product.name|truncatewords:20 }}</h5>
+        <p class="card-text">Rs. {{ product.price }}</p>
+        {% if product.stock > 0 %}
+          <p class="card-text" style="color: teal">In Stock</p>
+        {% else %}
+          <p class="card-text" style="color: gold">Out of Stock</p>
+        {% endif %}
+        <p><a href="{{ product.get_absolute_url }}" class="btn btn-dark btn-sm">View</a></p>
       </div>
     </div>
-    {% endfor %}
-  </div>
+    {% if forloop.counter|divisibleby:5 %}
+      </div><div class="row infinite-container">
+    {% endif %}
+  {% endfor %}
+</div>
   {% if page_obj.has_next %}
   <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
   {% endif %}
