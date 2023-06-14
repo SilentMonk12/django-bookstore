@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'recBookStore'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A242EE1AD0304EC7828957C475416706 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9D6F04EEFD9946FA90AD2BA6E970777D }}
